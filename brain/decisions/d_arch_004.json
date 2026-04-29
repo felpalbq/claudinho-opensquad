@@ -4,43 +4,44 @@
     "version": "1.0.0",
     "last_updated": "2026-04-29",
     "status": "accepted",
-    "tags": ["trello", "aprovacao", "publisher", "workflow"]
+    "tags": ["trello", "publisher", "workflow", "entrega"]
   },
-  "title": "Trello como stage de aprovacao — substituir Instagram Publisher direto",
-  "context": "O OpenSquad tem uma skill instagram-publisher que publica diretamente no Instagram. Isso requer configuracao pesada (sessao, 2FA, anti-bot). Para uma agencia com multiplos clientes, publicacao direta sem aprovacao previa e arriscada. O Trello ja tem MCP maduro e serve como kanban de aprovacao.",
-  "decision": "Substituir o Instagram Publisher direto por um pipeline Trello: o squad gera o conteudo, cria um card no Trello com o texto/imagem/video anexado, move para 'Aprovacao Pendente'. O operador (Felipe) revisa e aprova. Apos aprovacao, o card move para 'Aprovado / Publicar'. Uma skill futura (fase 3) pode fazer a publicacao automatica a partir desse stage.",
+  "title": "Trello Publisher — adaptar Instagram Publisher para publicar conteudo no Trello como destino final",
+  "context": "O OpenSquad tem uma skill instagram-publisher que publica diretamente no Instagram. Isso requer configuracao pesada (sessao, 2FA, anti-bot) e e arriscado para agencia com multiplos clientes. O Trello ja tem MCP maduro. A decisao e usar o Trello como destino final de entrega do conteudo: o Trello Publisher cria um card no board do cliente com todo o material pronto (texto, imagem/video, legenda, hashtags, data sugerida). O cliente e/ou operador aprova e publica manualmente a partir do card.",
+  "decision": "Adaptar a skill instagram-publisher para trello-publisher. O squad gera o conteudo e a skill Trello Publisher cria um card no board do cliente ativo com: texto do post, legenda, hashtags, imagem/video anexado (como attachment ou link), data sugerida de publicacao e status inicial. O Trello e o ponto final de entrega — nao ha publicacao automatica no Instagram a partir do Trello. O operador (Felipe) ou o cliente revisa o card e publica manualmente nas redes sociais.",
   "alternatives": [
     {
       "name": "Manter Instagram Publisher direto",
       "pros": ["Publicacao totalmente automatica", "Menor latencia end-to-end"],
       "cons": ["Configuracao pesada por cliente", "Risco de publicacao nao autorizada", "Bloqueio por anti-bot do Meta", "Dificil de auditar"],
       "rejected": true,
-      "reason": "Risco operacional alto. Publicacao automatica sem aprovacao humana e inaceitavel para agencia com clientes reais."
+      "reason": "Risco operacional alto. Publicacao automatica sem aprovacao e inaceitavel para agencia com clientes reais."
     },
     {
-      "name": "Usar Google Sheets como stage de aprovacao",
+      "name": "Usar Google Sheets como destino de entrega",
       "pros": ["Gratuito", "Familiar para o operador"],
       "cons": ["Nao tem pipeline visual de status", "Anexos de midia sao trabalhosos", "Sem automacao nativa de movimentacao"],
       "rejected": true,
-      "reason": "Trello e superior para workflow de aprovacao com colunas e movimentacao de cards. MCP do Trello e maduro."
+      "reason": "Trello e superior para visualizacao de status com colunas e movimentacao de cards. MCP do Trello e maduro."
     },
     {
-      "name": "Trello como kanban de aprovacao com stage intermediario",
-      "pros": ["Visual", "Auditavel", "MCP maduro", "Cliente pode ter acesso ao board", "Facil de automatizar proximo passo"],
-      "cons": ["Requer criar board por cliente", "Passo manual de aprovacao"],
+      "name": "Trello como destino final de entrega (Trello Publisher)",
+      "pros": ["Visual", "Auditavel", "MCP maduro", "Cliente pode ter acesso ao board", "Facil de organizar por status", "Sem risco de publicacao automatica errada"],
+      "cons": ["Requer criar board por cliente", "Publicacao final e manual (nao automatica)"],
       "rejected": false,
-      "reason": "Equilibrio ideal entre automacao e controle humano. O operador mantem a qualidade final."
+      "reason": "Trello e o local de entrega final. O operador e/ou cliente aprova e publica manualmente. Seguro e auditavel."
     }
   ],
-  "rationale": "O operador e estudante ADS e impressor grafico diurno, social media estrategico noturno. Ele precisa revisar conteudo antes de publicar para 6 clientes. Trello da visibilidade total do pipeline e permite ao cliente acompanhar se desejado.",
+  "rationale": "O operador e estudante ADS e impressor grafico diurno, social media estrategico noturno. Ele precisa entregar conteudo organizado aos 6 clientes. Trello funciona como um CMS simples: o card e o 'pacote de entrega' com tudo que o cliente precisa para publicar. Nao e um stage intermediario — e o ponto final do pipeline.",
   "implications": {
-    "positive": ["Controle de qualidade humano no loop", "Audit trail completo de aprovacoes", "Cliente pode participar do board", "Facil de escalar para outros canais (TikTok, LinkedIn)"],
-    "negative": ["Latencia adicional de aprovacao", "Requer disciplina do operador para revisar diariamente", "Necessita board por cliente"]
+    "positive": ["Controle total do que foi entregue a cada cliente", "Audit trail completo", "Cliente pode acompanhar o que esta pronto", "Sem risco de publicacao automatica errada", "Facil de escalar para outros canais (mesmo card serve para multiplas redes)"],
+    "negative": ["Publicacao final e manual (nao automatizada)", "Requer disciplina do operador para publicar diariamente", "Necessita board por cliente"]
   },
   "constraints": [
     "Cada cliente deve ter seu proprio board no Trello",
-    "Card deve conter: texto do post, legenda, hashtags, imagem/video anexado, data sugerida de publicacao",
-    "Colunas minimas: Backlog, Em Producao, Aprovacao Pendente, Aprovado/Publicar, Publicado",
-    "Skill de publisher automatico (futuro) so executa cards na coluna 'Aprovado/Publicar'"
+    "Card deve conter: texto do post, legenda, hashtags, imagem/video anexado, data sugerida de publicacao, status inicial",
+    "Colunas minimas: Backlog, Em Producao, Pronto para Revisao, Aprovado, Publicado",
+    "Trello Publisher e o destino final — nao ha integracao automatica do Trello para Instagram",
+    "Skill deve usar MCP do Trello ou API REST via curl dentro do bash"
   ]
 }

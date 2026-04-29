@@ -25,9 +25,9 @@
     },
     {
       "id": "d_arch_004",
-      "title": "Trello como stage de aprovacao — substituir Instagram Publisher direto",
+      "title": "Trello Publisher — adaptar Instagram Publisher para publicar conteudo no Trello como destino final",
       "status": "accepted",
-      "tags": ["trello", "aprovacao", "publisher", "workflow"]
+      "tags": ["trello", "publisher", "workflow", "entrega"]
     },
     {
       "id": "d_arch_005",
