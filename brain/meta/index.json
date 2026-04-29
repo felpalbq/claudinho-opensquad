@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "description": "Indice de meta — lista arquivos de metadados do sistema brain."
+  },
+  "files": [
+    {
+      "file": "schema.json",
+      "purpose": "JSON Schema formal para validacao de registros"
+    },
+    {
+      "file": "memory_policy.json",
+      "purpose": "Politica de quando salvar, fronteiras de dominio, staleness, limites de tamanho, snapshot policy"
+    },
+    {
+      "file": "session_protocol.json",
+      "purpose": "Protocolo obrigatorio de inicio/durante/fim de sessao"
+    },
+    {
+      "file": "operational_identity.json",
+      "purpose": "Identidade operacional e contexto de ecossistema multi-repo"
+    }
+  ]
+}

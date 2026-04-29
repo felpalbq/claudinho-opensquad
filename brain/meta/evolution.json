@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "description": "Log de evolucao estrutural do brain. Registra mudancas na arquitetura, adicoes de tipos de registro, e mudancas de padrao."
+  },
+  "evolution": [
+    {
+      "date": "2026-04-29",
+      "version": "1.0.0",
+      "type": "project_setup",
+      "change": "Repositorio claudinho-opensquad criado a partir do esqueleto do Claudinho original. Zero memoria do projeto Hermes/OpenClaw herdada.",
+      "rationale": "Novo contexto: Claudinho-OpenSquad e o arquiteto-engenheiro do framework multi-agente OpenSquad, rodando dentro do Claude Code com backend Ollama (kimi-k2.6 / glm-5.1)."
+    }
+  ]
+}

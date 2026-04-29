@@ -1,0 +1,49 @@
+{
+  "purpose": "definir como o Claude Code deve carregar, interpretar e utilizar o contexto do Claudinho-OpenSquad",
+
+  "principles": [
+    "memoria existe para evitar decisoes erradas, nao para fornecer todo o contexto possivel",
+    "apenas informacao relevante para a tarefa atual deve ser considerada",
+    "decisoes registradas tem prioridade sobre qualquer outro tipo de contexto",
+    "estado representado e referencia estrutural, nao evidencia de execucao",
+    "quanto menor e mais preciso o contexto, melhor a qualidade da decisao"
+  ],
+
+  "memory_layers": {
+    "claudinho_brain": {
+      "location": "repo claudinho-opensquad/brain/",
+      "format": "JSON + Markdown",
+      "written_by": "Arquiteto (Claudinho-OpenSquad)",
+      "lifecycle": "permanente ate revisao",
+      "function": "decisoes arquiteturais — como construir",
+      "rule": "nunca contem decisoes operacionais ou preferencias do usuario"
+    }
+  },
+
+  "loading_rules": [
+    "sempre carregar meta e decisions antes de qualquer outra memoria",
+    "carregar state apenas quando necessario para entender o contexto atual",
+    "evitar carregar patterns por padrao",
+    "nunca carregar memoria apenas por recencia",
+    "preferir precisao sobre volume de contexto"
+  ],
+
+  "usage_rules": [
+    "decisoes tem prioridade absoluta sobre qualquer outro tipo de memoria",
+    "meta define como interpretar todas as outras camadas",
+    "state deve ser usado como referencia, nunca como confirmacao de execucao"
+  ],
+
+  "restrictions": [
+    "nao assumir que memoria representa execucao real do sistema",
+    "nao usar memoria para simular comportamento do sistema",
+    "nao usar state como memoria persistente",
+    "nao criar memoria persistente no runtime — vive em repo separado"
+  ],
+
+  "conflict_resolution": [
+    "em caso de conflito, decisions sempre prevalecem",
+    "se houver ambiguidade, solicitar esclarecimento antes de agir",
+    "nunca resolver conflito com suposicao"
+  ]
+}

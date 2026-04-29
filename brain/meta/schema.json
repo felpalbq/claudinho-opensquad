@@ -1,0 +1,110 @@
+{
+  "purpose": "definir a estrutura esperada dos arquivos do Claudinho-OpenSquad para garantir consistencia e previsibilidade",
+
+  "global_rules": [
+    "todo arquivo deve ser valido em JSON",
+    "campos devem ter nomes claros e sem ambiguidade",
+    "estrutura deve ser previsivel e consistente entre arquivos",
+    "evitar campos desnecessarios ou redundantes",
+    "dados devem ser objetivos, sem linguagem interpretativa"
+  ],
+
+  "file_types": {
+    "meta": {
+      "description": "arquivos que definem comportamento do Claude Code",
+      "allowed_fields": [
+        "purpose",
+        "principles",
+        "rules",
+        "steps",
+        "relationships",
+        "expected_behavior"
+      ]
+    },
+
+    "decisions": {
+      "description": "registro de decisoes arquiteturais",
+      "required_fields": [
+        "id",
+        "title",
+        "date",
+        "domain",
+        "status",
+        "decision",
+        "rationale"
+      ],
+      "optional_fields": [
+        "impact",
+        "alternatives",
+        "consequences",
+        "related_patterns",
+        "related_decisions"
+      ]
+    },
+
+    "state": {
+      "description": "representacao estrutural do estado atual do projeto",
+      "rules": [
+        "nao deve representar execucao em tempo real",
+        "deve refletir organizacao atual do sistema",
+        "deve ser atualizado de forma consistente"
+      ]
+    },
+
+    "projects": {
+      "description": "informacoes gerais sobre o projeto",
+      "rules": [
+        "manter alto nivel",
+        "evitar detalhes operacionais",
+        "nao duplicar decisoes ou estado"
+      ]
+    },
+
+    "patterns": {
+      "description": "referencias opcionais de estrutura ou abordagem",
+      "rules": [
+        "nao sao obrigatorios",
+        "nao devem influenciar decisoes criticas",
+        "devem ser usados apenas como apoio"
+      ]
+    },
+
+    "knowledge": {
+      "description": "informacoes auxiliares",
+      "rules": [
+        "nao devem ser usadas para decisoes estruturais",
+        "devem ser considerados secundarios",
+        "evitar excesso de conteudo"
+      ]
+    }
+  },
+
+  "naming_conventions": [
+    "usar nomes curtos e descritivos",
+    "evitar abreviacoes ambiguas",
+    "manter consistencia entre arquivos semelhantes",
+    "usar snake_case para chaves JSON"
+  ],
+
+  "data_quality_rules": [
+    "evitar duplicacao de informacao entre arquivos",
+    "evitar contradicoes entre decisoes",
+    "manter consistencia entre estrutura e conteudo",
+    "nao armazenar dados desnecessarios"
+  ],
+
+  "expected_behavior": {
+    "correct": [
+      "manter estrutura consistente entre arquivos",
+      "usar campos padronizados",
+      "organizar dados de forma clara e objetiva",
+      "evitar redundancia"
+    ],
+    "incorrect": [
+      "misturar tipos de informacao no mesmo arquivo",
+      "criar estruturas inconsistentes",
+      "usar linguagem vaga ou interpretativa",
+      "duplicar conteudo entre arquivos"
+    ]
+  }
+}

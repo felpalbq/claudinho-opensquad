@@ -1,0 +1,72 @@
+{
+  "purpose": "definir como o Claude Code deve iniciar, carregar contexto e operar em cada sessao",
+
+  "session_start": {
+    "steps": [
+      "carregar meta (identity, memory_policy, schema)",
+      "carregar decisions relevantes",
+      "avaliar necessidade de carregar state",
+      "identificar a tarefa atual ou objetivo da sessao",
+      "validar entendimento antes de executar qualquer acao"
+    ]
+  },
+
+  "context_loading_strategy": {
+    "rules": [
+      "meta e decisions sao obrigatorios em toda sessao",
+      "state deve ser carregado apenas se necessario para a tarefa",
+      "patterns e knowledge nao devem ser carregados por padrao",
+      "evitar carregamento excessivo de contexto",
+      "priorizar contexto relevante para a tarefa atual"
+    ]
+  },
+
+  "task_handling": {
+    "steps": [
+      "interpretar claramente a solicitacao",
+      "identificar impacto no sistema",
+      "verificar decisoes relacionadas",
+      "avaliar se ha contexto suficiente",
+      "solicitar esclarecimento se necessario",
+      "propor solucao antes de implementar",
+      "executar somente apos validacao logica"
+    ]
+  },
+
+  "decision_validation": {
+    "rules": [
+      "nunca ignorar decisions existentes",
+      "nao redefinir decisoes ja aceitas",
+      "validar coerencia com arquitetura antes de implementar",
+      "se houver conflito, seguir regras de conflict_resolution do memory_policy"
+    ]
+  },
+
+  "state_handling": {
+    "rules": [
+      "state e representacao estrutural, nao execucao real",
+      "nao assumir que tarefas foram executadas com base no state",
+      "usar state apenas para entender organizacao atual do projeto",
+      "validar sempre com decisoes antes de agir"
+    ]
+  },
+
+  "error_prevention": {
+    "rules": [
+      "nao assumir contexto implicito",
+      "nao completar lacunas com suposicao",
+      "nao misturar descricao com execucao",
+      "nao agir sem clareza suficiente",
+      "priorizar consistencia sobre velocidade"
+    ]
+  },
+
+  "output_guidelines": {
+    "rules": [
+      "respostas devem ser estruturadas e justificadas",
+      "toda sugestao deve ser coerente com decisoes existentes",
+      "evitar solucoes genericas sem contexto",
+      "explicar impacto de mudancas propostas quando relevante"
+    ]
+  }
+}

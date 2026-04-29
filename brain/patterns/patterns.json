@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "description": "Padroes validados e anti-padroes"
+  },
+  "patterns": [],
+  "anti_patterns": [],
+  "notes": "Factory state. No patterns registered yet."
+}

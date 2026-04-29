@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "updated_by": "claude_code",
+    "session_id": "opensquad_setup_2026_04_29"
+  },
+  "project_state": {
+    "phase": "setup",
+    "status": "estrutura_base_criada"
+  },
+  "objective": {
+    "current": "Adaptar o framework OpenSquad para operar com backend Ollama (kimi-k2.6 / glm-5.1) dentro do Claude Code, com multi-cliente via estrutura clients/.",
+    "success_criteria": [
+      "Estrutura multi-cliente implementada (clients/{cliente}/squads/)",
+      "Skills customizadas criadas: engagement-scorer, content-pattern-extractor, angle-generator",
+      "Adaptacao do Pipeline Runner para carregar company.md por cliente",
+      "Mapeamento de model tiers: fast -> glm-5.1, powerful -> kimi-k2.6",
+      "Teste de execucao de squad com 1 cliente (Casa do Bicho)",
+      "Dashboard funcionando localmente (localhost:3000)",
+      "Pipeline de video (FFmpeg + Whisper) validado"
+    ]
+  },
+  "runtime_state": {
+    "_volatile": true,
+    "_note": "Estes campos refletem o estado no momento da ultima escrita. Nao usar como fonte de verdade em nova sessao.",
+    "llm_primary": "ollama/kimi-k2.6:cloud",
+    "llm_fallback": "ollama/glm-5.1:cloud",
+    "ollama_status": "operational",
+    "claude_code_status": "operational",
+    "mcp_servers": [
+      "playwright",
+      "apify",
+      "tavily"
+    ],
+    "opensquad_version": "0.1.15"
+  },
+  "focus": {
+    "current": "Criar estrutura base do Claudinho-OpenSquad e inicializar repositorio GitHub.",
+    "next": [
+      "Adaptar estrutura para multi-cliente (clients/)",
+      "Criar skill engagement-scorer",
+      "Criar skill content-pattern-extractor",
+      "Criar skill angle-generator",
+      "Testar squad com cliente Casa do Bicho",
+      "Configurar Figma MCP para design de templates",
+      "Validar pipeline de video com FFmpeg"
+    ]
+  },
+  "known_blockers": [],
+  "constraints": [
+    "Claudinho-OpenSquad e builder/memoria — nao e runtime",
+    "OpenSquad roda dentro do Claude Code — nao e agente autonomo 24/7",
+    "Ollama local com kimi-k2.6 (1T params) em CPU — latencia alta (30s-7min)",
+    "Model tier fast: glm-5.1 / powerful: kimi-k2.6",
+    "max_concurrent_subagents: 1 — nunca paralelizar no Ollama",
+    "MCPs funcionam via Claude Code, nao via modelo Ollama diretamente",
+    "Playwright MCP e pe central para Sherlock e navegacao web",
+    "Instagram Publisher requer configuracao pesada — usar Trello como stage de aprovaacao"
+  ],
+  "implementation_plan": {
+    "phases": 4,
+    "critical_path": "1->2->3->4",
+    "current_phase": 1,
+    "phase_1": "Setup — estrutura base, repo GitHub, esqueleto do brain",
+    "phase_2": "Adaptacao — multi-cliente, skills customizadas, mapeamento de model tiers",
+    "phase_3": "Validacao — teste de squad end-to-end com 1 cliente",
+    "phase_4": "Producao — dashboard, pipeline de video, otimizacao"
+  },
+  "context": {
+    "project": "OpenSquad — Framework multi-agente para producao de conteudo social",
+    "operator": "Felipe — estudante ADS, impressor grafico diurno, social media estrategico noturno. 6 clientes na regiao de Ilheus/Itabuna.",
+    "domain": "Social media estrategico como dominio principal",
+    "integrations_planned": [
+      "Ollama (kimi-k2.6 / glm-5.1)",
+      "Playwright MCP",
+      "Apify MCP",
+      "Tavily MCP",
+      "Composio MCP",
+      "Canva MCP",
+      "Figma MCP",
+      "Trello (via skill ou MCP)"
+    ],
+    "stack": "Claude Code CLI + Ollama Cloud + MCP servers",
+    "claude_code_env": "CLI oficial via Ollama, modelo kimi-k2.6, aceita skills e MCP. NAO guarda memoria entre sessoes — Claudinho-OpenSquad preenche essa lacuna"
+  }
+}
