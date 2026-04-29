@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "id": "d_arch_001",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["ollama", "model-tier", "custo", "performance"]
+  },
+  "title": "Model tier mapping Ollama — fast/GLM 5.1, powerful/Kimi K2.6",
+  "context": "O OpenSquad ja tem model_tier por step (fast / powerful). Precisamos mapear esses tiers para os modelos Ollama disponiveis (kimi-k2.6:cloud e glm-5.1:cloud) de forma a otimizar custo/latencia sem degradar qualidade.",
+  "decision": "Mapear fast -> GLM 5.1:cloud e powerful -> Kimi K2.6:cloud. Usar GLM 5.1 nos steps simples (formatacao, revisao, persona switching, outputs estruturados) e Kimi K2.6 apenas nos steps que exigem raciocinio longo (discovery, estrategia, pipelines complexos).",
+  "alternatives": [
+    {
+      "name": "Usar Kimi K2.6 em todos os steps",
+      "pros": ["Qualidade maxima em todo o pipeline", "Menor complexidade de configuracao"],
+      "cons": ["Latencia alta (30s-7min) em steps triviais", "Custo computacional desnecessario", "Sobrecarga de CPU constante"],
+      "rejected": true,
+      "reason": "Nao ha beneficio em usar 1T de parametros para formatar JSON ou revisar ortografia."
+    },
+    {
+      "name": "Usar GLM 5.1 em todos os steps",
+      "pros": ["Latencia menor", "Menor custo computacional"],
+      "cons": ["Qualidade insuficiente para discovery e estrategia", "Contexto longo mal gerido"],
+      "rejected": true,
+      "reason": "GLM 5.1 nao aguenta bem contexto pesado e raciocinio estrategico. Kimi K2.6 e necessario para esses casos."
+    },
+    {
+      "name": "Mapeamento hibrido com fallback automatico",
+      "pros": ["Escalabilidade automatica", "Resiliencia se um modelo falhar"],
+      "cons": ["Maior complexidade de implementacao", "Necessita instrumentacao adicional"],
+      "rejected": false,
+      "reason": "Adotado como evolucao futura. Fase 1 usa mapeamento fixo."
+    }
+  ],
+  "rationale": "O Kimi K2.6 tem 1T de parametros e roda em CPU — latencia alta. Usa-lo para tarefas triviais e desperdicio. O GLM 5.1 e suficiente para steps rapidos. A separacao por tier ja existe no OpenSquad; apenas precisamos preencher o mapeamento.",
+  "implications": {
+    "positive": ["Corte drastico de latencia em steps simples", "Qualidade preservada em steps criticos", "CPU local aliviada"],
+    "negative": ["Dois modelos para manter atualizados", "Possivel inconsistencia de tom entre tiers se nao calibrado"]
+  },
+  "constraints": [
+    "max_concurrent_subagents: 1 — nunca paralelizar no Ollama",
+    "Kimi K2.6 em CPU tem latencia 30s-7min dependendo do prompt",
+    "GLM 5.1 e fallback automatico se Kimi falhar"
+  ]
+}

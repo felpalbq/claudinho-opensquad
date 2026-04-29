@@ -7,7 +7,7 @@
   },
   "project_state": {
     "phase": "setup",
-    "status": "estrutura_base_criada"
+    "status": "decisoes_iniciais_registradas"
   },
   "objective": {
     "current": "Adaptar o framework OpenSquad para operar com backend Ollama (kimi-k2.6 / glm-5.1) dentro do Claude Code, com multi-cliente via estrutura clients/.",
@@ -36,7 +36,7 @@
     "opensquad_version": "0.1.15"
   },
   "focus": {
-    "current": "Criar estrutura base do Claudinho-OpenSquad e inicializar repositorio GitHub.",
+    "current": "Criar skills customizadas (engagement-scorer, content-pattern-extractor, angle-generator) e adaptar estrutura multi-cliente.",
     "next": [
       "Adaptar estrutura para multi-cliente (clients/)",
       "Criar skill engagement-scorer",
@@ -55,18 +55,27 @@
     "Model tier fast: glm-5.1 / powerful: kimi-k2.6",
     "max_concurrent_subagents: 1 — nunca paralelizar no Ollama",
     "MCPs funcionam via Claude Code, nao via modelo Ollama diretamente",
-    "Playwright MCP e pe central para Sherlock e navegacao web",
-    "Instagram Publisher requer configuracao pesada — usar Trello como stage de aprovaacao"
+    "Playwright MCP e peca central para Sherlock e navegacao web",
+    "Instagram Publisher requer configuracao pesada — usar Trello como stage de aprovacao"
   ],
   "implementation_plan": {
     "phases": 4,
     "critical_path": "1->2->3->4",
     "current_phase": 1,
-    "phase_1": "Setup — estrutura base, repo GitHub, esqueleto do brain",
+    "phase_1": "Setup — estrutura base, repo GitHub, decisoes iniciais registradas",
     "phase_2": "Adaptacao — multi-cliente, skills customizadas, mapeamento de model tiers",
     "phase_3": "Validacao — teste de squad end-to-end com 1 cliente",
     "phase_4": "Producao — dashboard, pipeline de video, otimizacao"
   },
+  "decisions": [
+    "d_arch_001",
+    "d_arch_002",
+    "d_arch_003",
+    "d_arch_004",
+    "d_arch_005",
+    "d_arch_006",
+    "d_arch_007"
+  ],
   "context": {
     "project": "OpenSquad — Framework multi-agente para producao de conteudo social",
     "operator": "Felipe — estudante ADS, impressor grafico diurno, social media estrategico noturno. 6 clientes na regiao de Ilheus/Itabuna.",

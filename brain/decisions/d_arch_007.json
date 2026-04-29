@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "id": "d_arch_007",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["imagem", "pollinations", "gratuito", "prototipo"]
+  },
+  "title": "Pollinations.ai como gerador de imagem padrao para prototipos",
+  "context": "O OpenSquad nao tem geracao de imagem nativa. Skills de design dependem de tool calls para geradores de imagem. Precisamos de uma opcao gratuita e funcional para gerar imagens de social media durante o desenvolvimento e prototipagem, sem custo de API.",
+  "decision": "Usar Pollinations.ai como gerador de imagem padrao para prototipos e conteudo inicial. E completamente gratuito, API publica, sem key necessaria, qualquer modelo de imagem via URL simples. Ideal para fase de testes e para cliente que aceita qualidade de prototipo. Para producao final, avaliar Canva MCP (edicao basica) ou Figma MCP (design system).",
+  "alternatives": [
+    {
+      "name": "Replicate MCP (pay per use)",
+      "pros": ["Modelos de alta qualidade (SDXL, Midjourney-like)", "MCP maduro"],
+      "cons": ["Custo por imagem (centavos)", "Requer API key", "Latencia de rede"],
+      "rejected": false,
+      "reason": "Reserva para producao. Nao e necessario pagar durante prototipagem."
+    },
+    {
+      "name": "fal.ai (free tier existe)",
+      "pros": ["Free tier disponivel", "Boa qualidade"],
+      "cons": ["Ainda requer cadastro e key", "Limites do free tier"],
+      "rejected": false,
+      "reason": "Opcao intermediaria. Usar se Pollinations nao atender qualidade."
+    },
+    {
+      "name": "Canva MCP para geracao de imagem",
+      "pros": ["Integrado ao workflow de design", "Templates prontos"],
+      "cons": ["Escopo limitado do MCP", "Nao gera imagem do zero — preenche templates"],
+      "rejected": false,
+      "reason": "Util para montagem final de post (texto + imagem em template), nao para geracao de imagem pura."
+    },
+    {
+      "name": "Pollinations.ai (gratuito, sem key)",
+      "pros": ["Completamente gratuito", "Sem API key", "URL simples", "Qualidade suficiente para prototipos", "Varios modelos disponiveis"],
+      "cons": ["Qualidade inferior a Replicate/Midjourney", "Sem garantia de uptime", "Limitacoes de uso comercial nao claras"],
+      "rejected": false,
+      "reason": "Melhor opcao para fase de desenvolvimento e testes. Zero friccao."
+    }
+  ],
+  "rationale": "Pollinations.ai remove a barreira de custo e configuracao na fase inicial. Permite testar o pipeline end-to-end sem gastar. Quando o pipeline estiver validado, podemos substituir por Replicate ou fal.ai para qualidade de producao.",
+  "implications": {
+    "positive": ["Custo zero na fase de prototipagem", "Testes ilimitados de prompt", "Facil de substituir depois (mesma interface de skill)", "Nenhuma configuracao de API key"],
+    "negative": ["Qualidade pode nao atender clientes exigentes", "Sem controle de seed/variancia", "Possivel downtime do servico gratuito"]
+  },
+  "constraints": [
+    "Pollinations.ai e para prototipo — nao prometer qualidade de producao aos clientes sem validar",
+    "Skill de image-generation deve abstrair o provedor (Pollinations, Replicate, fal.ai) para facilitar troca",
+    "Verificar termos de uso comercial antes de usar em producao",
+    "Para producao final, preferir Figma MCP (design system) + asset proprio do cliente"
+  ]
+}

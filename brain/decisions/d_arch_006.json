@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "id": "d_arch_006",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["playwright", "mcp", "sherlock", "browser"]
+  },
+  "title": "Playwright MCP como infraestrutura central para Sherlock e navegacao web",
+  "context": "Inicialmente havia duvida se Playwright funcionaria com Ollama backend. A analise confirmou: via Claude Code, o MCP do Playwright funciona normalmente. O modelo (Kimi) instrui, o Claude Code executa. Playwright e essencial para Sherlock (analise de perfis concorrentes no Instagram), coleta de referencias e possivel publicacao em plataformas sem API.",
+  "decision": "Manter Playwright MCP como peca central do sistema. Usar para: (1) Sherlock — entrar no Instagram, coletar dados de perfis concorrentes, extrair padroes; (2) Pesquisa web quando search APIs nao sao suficientes; (3) Screenshots para tutoriais e manuais; (4) Reutilizar sessao salva em _browser_profile/ para evitar login repetido.",
+  "alternatives": [
+    {
+      "name": "Remover Playwright e usar apenas APIs de scraping (Apify)",
+      "pros": ["Sem dependencia de browser", "Mais rapido em alguns casos"],
+      "cons": ["Custo por request no Apify", "Menor flexibilidade para interacoes complexas (login, scroll infinito)", "Instagram bloqueia scraping facilmente"],
+      "rejected": true,
+      "reason": "Apify e util mas nao substitui interacao real com o browser. Playwright e mais robusto para Instagram."
+    },
+    {
+      "name": "Usar Puppeteer MCP em vez de Playwright",
+      "pros": ["Alternativa madura", "Comunidade grande"],
+      "cons": ["Playwright ja esta configurado e funcional", "Puppeteer nao tem vantagem clara sobre Playwright para este caso"],
+      "rejected": true,
+      "reason": "Playwright ja esta no projeto e funciona. Nao ha beneficio em trocar."
+    },
+    {
+      "name": "Manter Playwright como infraestrutura central",
+      "pros": ["Browser automation completo", "Gratuito", "Sessao reutilizavel", "Funciona via Claude Code + Ollama", "Screenshots para evidencias"],
+      "cons": ["Requer manutencao de seletores CSS quando Instagram muda layout", "Sessao pode expirar"],
+      "rejected": false,
+      "reason": "Ja validado na pratica pelo usuario. Essencial para Sherlock e pesquisa de concorrentes."
+    }
+  ],
+  "rationale": "O Kimi nunca toca no browser. Ele chama a tool (playwright_navigate, playwright_click, etc.) e o Claude Code executa. O modelo recebe o resultado. Isso funciona independente de Ollama, OpenAI ou outro backend. Playwright e peca central para Sherlock — sem ele, nao ha coleta de dados de concorrentes.",
+  "implications": {
+    "positive": ["Coleta de dados de Instagram funciona", "Sessao salva evita login repetido", "Screenshots para evidencias de trabalho", "Flexivel para outras plataformas"],
+    "negative": ["Manutencao de seletores quando Instagram atualiza", "Sessao pode expirar e requerer re-login", "Depende de Chrome instalado"]
+  },
+  "constraints": [
+    "Sessao deve ser salva em _browser_profile/ e reutilizada",
+    "Login no Instagram deve ser feito uma vez e persistido",
+    "Sherlock deve respeitar rate limits do Instagram (delay entre requests)",
+    "Nunca publicar conteudo automaticamente sem aprovacao — Playwright e para coleta, nao publicacao direta"
+  ]
+}

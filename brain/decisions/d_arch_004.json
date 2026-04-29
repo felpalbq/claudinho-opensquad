@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "id": "d_arch_004",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["trello", "aprovacao", "publisher", "workflow"]
+  },
+  "title": "Trello como stage de aprovacao — substituir Instagram Publisher direto",
+  "context": "O OpenSquad tem uma skill instagram-publisher que publica diretamente no Instagram. Isso requer configuracao pesada (sessao, 2FA, anti-bot). Para uma agencia com multiplos clientes, publicacao direta sem aprovacao previa e arriscada. O Trello ja tem MCP maduro e serve como kanban de aprovacao.",
+  "decision": "Substituir o Instagram Publisher direto por um pipeline Trello: o squad gera o conteudo, cria um card no Trello com o texto/imagem/video anexado, move para 'Aprovacao Pendente'. O operador (Felipe) revisa e aprova. Apos aprovacao, o card move para 'Aprovado / Publicar'. Uma skill futura (fase 3) pode fazer a publicacao automatica a partir desse stage.",
+  "alternatives": [
+    {
+      "name": "Manter Instagram Publisher direto",
+      "pros": ["Publicacao totalmente automatica", "Menor latencia end-to-end"],
+      "cons": ["Configuracao pesada por cliente", "Risco de publicacao nao autorizada", "Bloqueio por anti-bot do Meta", "Dificil de auditar"],
+      "rejected": true,
+      "reason": "Risco operacional alto. Publicacao automatica sem aprovacao humana e inaceitavel para agencia com clientes reais."
+    },
+    {
+      "name": "Usar Google Sheets como stage de aprovacao",
+      "pros": ["Gratuito", "Familiar para o operador"],
+      "cons": ["Nao tem pipeline visual de status", "Anexos de midia sao trabalhosos", "Sem automacao nativa de movimentacao"],
+      "rejected": true,
+      "reason": "Trello e superior para workflow de aprovacao com colunas e movimentacao de cards. MCP do Trello e maduro."
+    },
+    {
+      "name": "Trello como kanban de aprovacao com stage intermediario",
+      "pros": ["Visual", "Auditavel", "MCP maduro", "Cliente pode ter acesso ao board", "Facil de automatizar proximo passo"],
+      "cons": ["Requer criar board por cliente", "Passo manual de aprovacao"],
+      "rejected": false,
+      "reason": "Equilibrio ideal entre automacao e controle humano. O operador mantem a qualidade final."
+    }
+  ],
+  "rationale": "O operador e estudante ADS e impressor grafico diurno, social media estrategico noturno. Ele precisa revisar conteudo antes de publicar para 6 clientes. Trello da visibilidade total do pipeline e permite ao cliente acompanhar se desejado.",
+  "implications": {
+    "positive": ["Controle de qualidade humano no loop", "Audit trail completo de aprovacoes", "Cliente pode participar do board", "Facil de escalar para outros canais (TikTok, LinkedIn)"],
+    "negative": ["Latencia adicional de aprovacao", "Requer disciplina do operador para revisar diariamente", "Necessita board por cliente"]
+  },
+  "constraints": [
+    "Cada cliente deve ter seu proprio board no Trello",
+    "Card deve conter: texto do post, legenda, hashtags, imagem/video anexado, data sugerida de publicacao",
+    "Colunas minimas: Backlog, Em Producao, Aprovacao Pendente, Aprovado/Publicar, Publicado",
+    "Skill de publisher automatico (futuro) so executa cards na coluna 'Aprovado/Publicar'"
+  ]
+}

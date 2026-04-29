@@ -4,5 +4,48 @@
     "last_updated": "2026-04-29",
     "description": "Indice de decisoes arquiteturais"
   },
-  "decisions": []
+  "decisions": [
+    {
+      "id": "d_arch_001",
+      "title": "Model tier mapping Ollama — fast/GLM 5.1, powerful/Kimi K2.6",
+      "status": "accepted",
+      "tags": ["ollama", "model-tier", "custo", "performance"]
+    },
+    {
+      "id": "d_arch_002",
+      "title": "Estrutura multi-cliente — clients/{cliente}/ em vez de company.md singular",
+      "status": "accepted",
+      "tags": ["multi-cliente", "estrutura", "agencia", "pipeline-runner"]
+    },
+    {
+      "id": "d_arch_003",
+      "title": "Skills complementares obrigatorias — engagement-scorer, content-pattern-extractor, angle-generator",
+      "status": "accepted",
+      "tags": ["skills", "sherlock", "copywriting", "engajamento"]
+    },
+    {
+      "id": "d_arch_004",
+      "title": "Trello como stage de aprovacao — substituir Instagram Publisher direto",
+      "status": "accepted",
+      "tags": ["trello", "aprovacao", "publisher", "workflow"]
+    },
+    {
+      "id": "d_arch_005",
+      "title": "Pipeline de video local — FFmpeg + Whisper, custo zero",
+      "status": "accepted",
+      "tags": ["video", "ffmpeg", "whisper", "custo-zero"]
+    },
+    {
+      "id": "d_arch_006",
+      "title": "Playwright MCP como infraestrutura central para Sherlock e navegacao web",
+      "status": "accepted",
+      "tags": ["playwright", "mcp", "sherlock", "browser"]
+    },
+    {
+      "id": "d_arch_007",
+      "title": "Pollinations.ai como gerador de imagem padrao para prototipos",
+      "status": "accepted",
+      "tags": ["imagem", "pollinations", "gratuito", "prototipo"]
+    }
+  ]
 }

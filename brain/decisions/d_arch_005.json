@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "id": "d_arch_005",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["video", "ffmpeg", "whisper", "custo-zero"]
+  },
+  "title": "Pipeline de video local — FFmpeg + Whisper, custo zero",
+  "context": "O OpenSquad menciona FFmpeg + Whisper no pipeline de video, mas nao detalha a integracao. Para uma agencia de social media, video (Reels, TikTok) e essencial. Precisamos de um pipeline que transcreva, corte, adicione legendas e exporte no formato correto sem custo de API externa.",
+  "decision": "Implementar pipeline local de video usando FFmpeg (edicao/corte/conversao) + OpenAI Whisper (transcricao). Fluxo: Whisper transcreve o audio -> FFmpeg corta nos timestamps certos -> monta reels com legenda queimada (SRT/ASS) -> exporta no formato da plataforma (mp4, mov, webm). Tudo executado via bash pelo Claude Code, sem custo de API de edicao de video.",
+  "alternatives": [
+    {
+      "name": "Usar API paga de edicao de video (RunwayML, JSON2Video)",
+      "pros": ["Qualidade profissional", "Transicoes elaboradas", "Menor esforco tecnico"],
+      "cons": ["Custo por video", "Dependencia de internet", "Latencia de upload/download", "Limite de requests"],
+      "rejected": true,
+      "reason": "O projeto prioriza custo zero. APIs pagas sao reserva para quando o pipeline local nao atender."
+    },
+    {
+      "name": "Usar Canva para edicao de video",
+      "pros": ["Interface visual", "Templates prontos"],
+      "cons": ["Nao e automatizavel via MCP (escopo limitado)", "Requer intervencao manual", "Nao suporta edicao baseada em transcricao"],
+      "rejected": true,
+      "reason": "Canva MCP tem escopo limitado para video. Nao atende pipeline automatizado."
+    },
+    {
+      "name": "FFmpeg + Whisper local via bash",
+      "pros": ["Custo zero", "Total controle de parametros", "Nao depende de internet", "Rapido para tarefas simples (corte, legenda, conversao)", "Claude Code executa bash nativamente"],
+      "cons": ["Limitado a edicoes simples", "Sem motion graphics", "Transicoes elaboradas requerem trabalho manual"],
+      "rejected": false,
+      "reason": "Atende 80% das necessidades de social media (cortes, legendas, formatos). Custo zero e essencial para o operador."
+    }
+  ],
+  "rationale": "O Claude Code executa bash nativamente. Via Ollama como backend, o Claude Code ainda e quem executa o bash — o modelo so instrui. Entao continua funcionando. FFmpeg cobre: corte por timestamp, uniao de clips, legenda queimada, conversao de formato, resize, watermark, extract audio. Whisper cobre: transcricao com timestamps. Juntos formam pipeline completo.",
+  "implications": {
+    "positive": ["Custo zero por video", "Pipeline automatizado end-to-end", "Formato adaptavel por plataforma", "Latencia local (sem upload/download)"],
+    "negative": ["Qualidade visual limitada a recursos do FFmpeg", "Sem AI generativa de video (Sora, Runway)", "Requer instalacao local de FFmpeg e Whisper"]
+  },
+  "constraints": [
+    "FFmpeg deve estar instalado no PATH do sistema",
+    "Whisper (openai-whisper) pode rodar localmente ou via Ollama se disponivel",
+    "Pipeline deve gerar arquivos em pasta squads/{squad}/output/",
+    "Legendas devem seguir padrao SRT ou ASS para queima via FFmpeg",
+    "Resolucao de saida deve respeitar aspect ratio da plataforma (9:16 para Reels/TikTok, 1:1 para feed)"
+  ]
+}

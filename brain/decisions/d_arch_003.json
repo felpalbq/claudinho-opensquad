@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "id": "d_arch_003",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["skills", "sherlock", "copywriting", "engajamento"]
+  },
+  "title": "Skills complementares obrigatorias — engagement-scorer, content-pattern-extractor, angle-generator",
+  "context": "As skills existentes no OpenSquad (researching, sherlock-instagram, copywriting, instagram-feed/reels) sao generalistas e nao se conversam automaticamente. Para uma agencia de social media, e necessario extrair padroes de conteudo vencedores, ranquear potencial de engajamento e gerar angulos originais baseados em dados.",
+  "decision": "Criar 3 skills cirurgicas: (1) engagement-scorer — recebe lista de temas/conteudos pesquisados e retorna ranqueamento por potencial com justificativa; (2) content-pattern-extractor — recebe output do Sherlock, mapeia estrutura dos top posts (gancho, desenvolvimento, CTA, formato) e salva em memoria do squad; (3) angle-generator — recebe padroes extraidos + tema + historico do cliente e gera angulos novos com estrutura baseada nos vencedores.",
+  "alternatives": [
+    {
+      "name": "Usar apenas as skills existentes e calibrar prompts",
+      "pros": ["Nenhuma mudanca de codigo", "Rapido de implementar"],
+      "cons": ["Pesquisa e copy nao se conversam", "Nao ha memoria de padroes por cliente", "Angulos sao gerados sem base em dados reais"],
+      "rejected": true,
+      "reason": "A analise de geral_open.txt mostrou que as skills existentes nao atendem o caso de uso de agencia. Sao descritivas, nao preditivas."
+    },
+    {
+      "name": "Criar uma unica skill monolitica 'social-media-strategist'",
+      "pros": ["Unico ponto de manutencao", "Fluxo simplificado"],
+      "cons": ["Prompt muito longo", "Dificil de testar isoladamente", "Menor granularidade de reuso"],
+      "rejected": true,
+      "reason": "Skills monoliticas violam o principio de unica responsabilidade do OpenSquad. Sao mais dificeis de calibrar e reutilizar."
+    },
+    {
+      "name": "3 skills especializadas que se encadeiam",
+      "pros": ["Granularidade de teste", "Reutilizaveis entre squads", "Encadeamento claro: Sherlock -> extractor -> scorer -> angle-generator", "Memoria persistente de padroes"],
+      "cons": ["Mais arquivos para manter", "Dependencia de ordem de execucao"],
+      "rejected": false,
+      "reason": "Alinhado com a filosofia do OpenSquad (skills como blocos combinaveis). Cada skill tem responsabilidade unica."
+    }
+  ],
+  "rationale": "O sistema de skills do OpenSquad foi feito exatamente para isso — criar uma skill e escrever um SKILL.md com instrucoes precisas. O Kimi executa. Nao precisa de codigo. A memoria do squad (memories.md) ja tem secoes prontas para guardar padroes entre runs.",
+  "implications": {
+    "positive": ["Pipeline de pesquisa a geracao de conteudo totalmente automatizado", "Memoria de padroes por cliente", "Angulos baseados em dados reais de concorrentes", "Facil de A/B testar isolando skills"],
+    "negative": ["Dependencia do Sherlock rodar antes do extractor", "Requer calibracao inicial de scoring"]
+  },
+  "constraints": [
+    "Cada skill deve ser um SKILL.md com instrucoes precisas",
+    "Engagement-scorer precisa de criterios calibrados por nicho (pet, moda, food, etc.)",
+    "Angle-generator deve checar historico do cliente para evitar repeticao de angulos",
+    "Content-pattern-extractor deve salvar em memories.md na secao correspondente ao cliente"
+  ]
+}

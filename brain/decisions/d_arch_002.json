@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "id": "d_arch_002",
+    "version": "1.0.0",
+    "last_updated": "2026-04-29",
+    "status": "accepted",
+    "tags": ["multi-cliente", "estrutura", "agencia", "pipeline-runner"]
+  },
+  "title": "Estrutura multi-cliente — clients/{cliente}/ em vez de company.md singular",
+  "context": "O OpenSquad foi projetado para uma unica empresa (company.md singular, squads/{nome}/). Para operar como agencia com 6 clientes ativos (Ilheus/Itabuna), e necessario isolar contexto, memoria e squads por cliente.",
+  "decision": "Adaptar a estrutura de diretorios para clients/{cliente}/ contendo company.md, squads/{nome}/ e _memory/. O Pipeline Runner deve carregar company.md do cliente ativo. O comando /opensquad cliente <nome> troca o contexto ativo.",
+  "alternatives": [
+    {
+      "name": "Manter company.md unico e prefixar squads por cliente",
+      "pros": ["Menor mudanca na estrutura", "Menos codigo para alterar"],
+      "cons": ["Contexto misturado entre clientes", "Risco de fuga de dados", "Dificil de escalar"],
+      "rejected": true,
+      "reason": "Nao resolve o problema de isolamento. Um squad pode ler memoria de outro cliente por engano."
+    },
+    {
+      "name": "Criar repositorio separado por cliente",
+      "pros": ["Isolamento total", "Git history separada"],
+      "cons": ["Overhead de manutencao de 6 repos", "Dificil compartilhar skills comuns", "Sincronizacao de updates do framework"],
+      "rejected": true,
+      "reason": "Custo operacional alto. Skills e atualizacoes do framework teriam que ser replicadas manualmente."
+    },
+    {
+      "name": "Estrutura clients/ com namespace por cliente",
+      "pros": ["Isolamento claro", "Compartilhamento de skills comuns", "Escalavel", "Pipeline Runner adaptavel"],
+      "cons": ["Mudanca estrutural cirurgica mas necessaria", "Necessita adaptar o onboarding"],
+      "rejected": false,
+      "reason": "Melhor custo-beneficio. Isola contexto sem fragmentar o framework."
+    }
+  ],
+  "rationale": "O usuario tem 6 clientes ativos. Operar com company.md unico e inviavel a medio prazo. A adaptacao e cirurgica: apenas o Pipeline Runner (carregamento de contexto), o Architect (criacao de squads) e o onboarding precisam mudar. O resto do sistema funciona igual.",
+  "implications": {
+    "positive": ["Contexto isolado por cliente", "Memoria persistente por cliente", "Escalavel para novos clientes", "Seguranca de dados entre concorrentes"],
+    "negative": ["Necessita refatorar Pipeline Runner", "Onboarding agora pergunta 'para qual cliente?'", "Dashboard precisa de visao multi-cliente"]
+  },
+  "constraints": [
+    "Nunca editar _opensquad/core/ sem entender o impacto em todos os IDEs",
+    "A memoria do squad (memories.md) ja tem secoes prontas para guardar padroes entre runs",
+    "Onboarding deve criar perfil por cliente, nao global"
+  ]
+}
