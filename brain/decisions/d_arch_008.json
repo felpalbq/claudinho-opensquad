@@ -1,0 +1,10 @@
+{
+  "id": "d_arch_008",
+  "title": "Separacao de responsabilidades — Claudinho (Claude Code) vs Agents OpenSquad",
+  "status": "accepted",
+  "date": "2026-04-29",
+  "author": "Felipe",
+  "tags": ["responsabilidade", "orquestracao", "agentes", "claudinho", "opensquad"],
+  "summary": "Delimitar rigorosamente o que e tarefa do Claudinho (arquitetura, construcao, manutencao do sistema) e o que e tarefa dos agents OpenSquad (execucao de tarefas de social media e marketing). Nunca mais executar manualmente o que deve ser delegado aos agents.",
+  "context": "Durante a primeira execucao do squad carrossel-pattern-extractor para Casa do Bicho, o operator (Claude Code/Claudinho) executou manualmente todo o pipeline: escreveu o pattern_extractor.py, gerou os angulos, criou os slides com Pillow, e publicou no Trello. Isso violou o proposito do OpenSquad, que e orquestrar agents autonomos. A qualidade ficou ruim porque nao houve execucao real dos LLMs Ollama, nem teste do switch de tiers, nem mapeamento de limites."
+}

@@ -46,6 +46,12 @@
       "title": "Pollinations.ai como gerador de imagem padrao para prototipos",
       "status": "accepted",
       "tags": ["imagem", "pollinations", "gratuito", "prototipo"]
+    },
+    {
+      "id": "d_arch_008",
+      "title": "Separacao de responsabilidades — Claudinho (Claude Code) vs Agents OpenSquad",
+      "status": "accepted",
+      "tags": ["responsabilidade", "orquestracao", "agentes", "claudinho", "opensquad"]
     }
   ]
 }

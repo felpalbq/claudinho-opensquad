@@ -6,8 +6,8 @@
     "session_id": "opensquad_setup_2026_04_29"
   },
   "project_state": {
-    "phase": "setup",
-    "status": "integracoes_validadas__estrutura_multi_cliente_criada__template_figma_validado"
+    "phase": "adaptacao",
+    "status": "primeiro_carrossel_gerado_e_entregue__skills_criadas"
   },
   "objective": {
     "current": "Adaptar o framework OpenSquad para operar com backend Ollama (kimi-k2.6 / glm-5.1) dentro do Claude Code, com multi-cliente via estrutura clients/.",
@@ -33,8 +33,7 @@
       "apify",
       "tavily",
       "trello",
-      "canva",
-      "figma"
+      "canva"
     ],
     "local_tools": {
       "ffmpeg": "C:/Users/Pc/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1-full_build/bin/ffmpeg.exe",
@@ -43,14 +42,14 @@
     "opensquad_version": "0.1.15"
   },
   "focus": {
-    "current": "Aguardando perfis de referência do Instagram para rodar Sherlock e extrair padrões de carrosséis.",
+    "current": "d_arch_008 registrada. Primeira execucao do pipeline foi manual (violacao). Aguardando re-execucao VIA AGENTS para validar LLMs Ollama, switch de tiers, e qualidade real.",
     "next": [
-      "Receber lista de perfis de referência do usuário",
-      "Executar Sherlock nos perfis de referência",
-      "Criar skill content-pattern-extractor",
-      "Criar skill angle-generator",
-      "Gerar primeiro carrossel para Casa do Bicho",
-      "Preencher template Figma e entregar no Trello"
+      "Re-executar carrossel-pattern-extractor para Casa do Bicho via agents Ollama (nao manualmente)",
+      "Testar pattern-extractor agent com kimi-k2.6 (powerful tier)",
+      "Testar angle-generator agent com glm-5.1 (fast tier)",
+      "Mapear latencia e capacity de cada modelo durante execucao real",
+      "Validar entrega Trello via trello-publisher agent",
+      "So entao: escalar para outros clientes e criar segundo carrossel"
     ]
   },
   "known_blockers": [],
@@ -62,7 +61,10 @@
     "max_concurrent_subagents: 1 — nunca paralelizar no Ollama",
     "MCPs funcionam via Claude Code, nao via modelo Ollama diretamente",
     "Playwright MCP e peca central para Sherlock e navegacao web",
-    "Instagram Publisher requer configuracao pesada — usar Trello como stage de aprovacao"
+    "Instagram Publisher requer configuracao pesada — usar Trello como stage de aprovacao",
+    "d_arch_008: Claudinho NUNCA executa tarefas de social media/marketing manualmente — DEVE orquestrar agents OpenSquad via Agent tool",
+    "d_arch_008: Tarefas de arquitetura/construcao = Claudinho. Tarefas de execucao de marketing = Agents. Sem excecao.",
+    "d_arch_008: Fallback manual so apos 3 falhas consecutivas de agente OU autorizacao explicita do usuario"
   ],
   "implementation_plan": {
     "phases": 4,
@@ -80,7 +82,8 @@
     "d_arch_004",
     "d_arch_005",
     "d_arch_006",
-    "d_arch_007"
+    "d_arch_007",
+    "d_arch_008"
   ],
   "context": {
     "project": "OpenSquad — Framework multi-agente para producao de conteudo social",
