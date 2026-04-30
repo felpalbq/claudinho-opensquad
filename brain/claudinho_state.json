@@ -7,7 +7,7 @@
   },
   "project_state": {
     "phase": "setup",
-    "status": "integracoes_validadas_parcialmente"
+    "status": "integracoes_validadas_e_ativas"
   },
   "objective": {
     "current": "Adaptar o framework OpenSquad para operar com backend Ollama (kimi-k2.6 / glm-5.1) dentro do Claude Code, com multi-cliente via estrutura clients/.",
@@ -34,7 +34,7 @@
       "tavily",
       "trello",
       "canva",
-      "figma (needs auth)"
+      "figma"
     ],
     "local_tools": {
       "ffmpeg": "C:/Users/Pc/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1-full_build/bin/ffmpeg.exe",
@@ -54,9 +54,7 @@
       "Validar pipeline de video com FFmpeg"
     ]
   },
-  "known_blockers": [
-    "Figma MCP precisa de autenticacao OAuth manual pelo usuario"
-  ],
+  "known_blockers": [],
   "constraints": [
     "Claudinho-OpenSquad e builder/memoria — nao e runtime",
     "OpenSquad roda dentro do Claude Code — nao e agente autonomo 24/7",
