@@ -7,7 +7,7 @@
   },
   "project_state": {
     "phase": "setup",
-    "status": "integracoes_validadas_e_ativas"
+    "status": "integracoes_validadas__estrutura_multi_cliente_criada__template_figma_validado"
   },
   "objective": {
     "current": "Adaptar o framework OpenSquad para operar com backend Ollama (kimi-k2.6 / glm-5.1) dentro do Claude Code, com multi-cliente via estrutura clients/.",
@@ -43,15 +43,14 @@
     "opensquad_version": "0.1.15"
   },
   "focus": {
-    "current": "Criar skills customizadas (engagement-scorer, content-pattern-extractor, angle-generator) e adaptar estrutura multi-cliente.",
+    "current": "Aguardando perfis de referência do Instagram para rodar Sherlock e extrair padrões de carrosséis.",
     "next": [
-      "Adaptar estrutura para multi-cliente (clients/)",
-      "Criar skill engagement-scorer",
+      "Receber lista de perfis de referência do usuário",
+      "Executar Sherlock nos perfis de referência",
       "Criar skill content-pattern-extractor",
       "Criar skill angle-generator",
-      "Testar squad com cliente Casa do Bicho",
-      "Configurar Figma MCP para design de templates",
-      "Validar pipeline de video com FFmpeg"
+      "Gerar primeiro carrossel para Casa do Bicho",
+      "Preencher template Figma e entregar no Trello"
     ]
   },
   "known_blockers": [],
